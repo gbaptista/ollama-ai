@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     ollama-ai (1.0.0)
-      faraday (~> 2.8, >= 2.8.1)
+      faraday (~> 2.8)
 
 GEM
   remote: https://rubygems.org/
