@@ -1,4 +1,4 @@
-# Ollama AI
+# Ollama
 
 A Ruby gem for interacting with [Ollama](https://github.com/jmorganca/ollama)'s API that allows you to run open source AI LLMs (Large Language Models) locally.
 
