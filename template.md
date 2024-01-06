@@ -1,4 +1,4 @@
-# Ollama
+# Ollama AI
 
 A Ruby gem for interacting with [Ollama](https://github.com/jmorganca/ollama)'s API that allows you to run open source AI LLMs (Large Language Models) locally.
 
@@ -624,6 +624,69 @@ Result:
  { 'status' => 'pushing manifest' },
  { 'status' => 'success' }]
 ```
+
+### Modes
+
+#### Text
+
+You can use the [generate](#generate-generate-a-completion) or [chat](#chat-generate-a-chat-completion) methods for text.
+
+#### Image
+
+![A black and white image of an old piano. The piano is an upright model, with the keys on the right side of the image. The piano is sitting on a tiled floor. There is a small round object on the top of the piano.](https://raw.githubusercontent.com/gbaptista/assets/main/gemini-ai/piano.jpg)
+
+> _Courtesy of [Unsplash](https://unsplash.com/photos/greyscale-photo-of-grand-piano-czPs0z3-Ggg)_
+
+You need to choose a model that supports images, like [LLaVA](https://ollama.ai/library/llava) or [bakllava](https://ollama.ai/library/bakllava), and encode the image as [Base64](https://en.wikipedia.org/wiki/Base64).
+
+Depending on your hardware, some models that support images can be slow, so you may want to increase the client [timeout](#timeout):
+
+```ruby
+client = Ollama.new(
+  credentials: { address: 'http://localhost:11434' },
+  options: {
+    server_sent_events: true,
+    connection: { request: { timeout: 120, read_timeout: 120 } } }
+)
+```
+
+Using the `generate` method:
+
+```ruby
+require 'base64'
+
+client.generate(
+  { model: 'llava',
+    prompt: 'Please describe this image.',
+    images: [Base64.strict_encode64(File.read('piano.jpg'))] }
+) do |event, raw|
+  print event['response']
+end
+```
+
+Output:
+> _The image is a black and white photo of an old piano, which appears to be in need of maintenance. A chair is situated right next to the piano. Apart from that, there are no other objects or people visible in the scene._
+
+Using the `chat` method:
+```ruby
+require 'base64'
+
+result = client.chat(
+  { model: 'llava',
+    messages: [
+      { role: 'user',
+        content: 'Please describe this image.',
+        images: [Base64.strict_encode64(File.read('piano.jpg'))] }
+    ] }
+) do |event, raw|
+  puts event
+end
+```
+
+Output:
+> _The image displays an old piano, sitting on a wooden floor with black keys. Next to the piano, there is another keyboard in the scene, possibly used for playing music._
+> 
+> _On top of the piano, there are two mice placed in different locations within its frame. These mice might be meant for controlling the music being played or simply as decorative items. The overall atmosphere seems to be focused on artistic expression through this unique instrument._
 
 ### Streaming and Server-Sent Events (SSE)
 
