@@ -1,6 +1,6 @@
 # Ollama AI
 
-A Ruby gem for interacting with [Ollama](https://github.com/jmorganca/ollama)'s API that allows you to run open source AI LLMs (Large Language Models) locally.
+A Ruby gem for interacting with [Ollama](https://ollama.ai)'s API that allows you to run open source AI LLMs (Large Language Models) locally.
 
 ![The image presents a llama's head merged with a red ruby gemstone against a light beige background. The red facets form both the ruby and the contours of the llama, creating a clever visual fusion.](https://raw.githubusercontent.com/gbaptista/assets/main/ollama-ai/ollama-ai-canvas.png)
 
