@@ -21,40 +21,40 @@ client = Ollama.new(
 )
 
 result = client.generate(
-  { model: 'dolphin-phi',
+  { model: 'llama2',
     prompt: 'Hi!' }
 )
 ```
 
 Result:
 ```ruby
-[{ 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T16:53:21.357816652Z',
+[{ 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:34:02.088810408Z',
    'response' => 'Hello',
    'done' => false },
- { 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T16:53:21.490053654Z',
+ { 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:34:02.419045606Z',
    'response' => '!',
    'done' => false },
- # ...
- { 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T16:53:24.82505599Z',
-   'response' => '.',
+ # ..
+ { 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:34:07.680049831Z',
+   'response' => '?',
    'done' => false },
- { 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T16:53:24.956774721Z',
+ { 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:34:07.872170352Z',
    'response' => '',
    'done' => true,
    'context' =>
-     [50_296, 10_057,
+     [518, 25_580,
       # ...
-      1037, 13],
-   'total_duration' => 5_702_027_026,
-   'load_duration' => 649_711,
-   'prompt_eval_count' => 25,
-   'prompt_eval_duration' => 2_227_159_000,
-   'eval_count' => 39,
-   'eval_duration' => 3_466_593_000 }]
+      13_563, 29_973],
+   'total_duration' => 11_653_781_127,
+   'load_duration' => 1_186_200_439,
+   'prompt_eval_count' => 22,
+   'prompt_eval_duration' => 5_006_751_000,
+   'eval_count' => 25,
+   'eval_duration' => 5_453_058_000 }]
 ```
 
 ## Index
@@ -113,7 +113,7 @@ API Documentation: https://github.com/jmorganca/ollama/blob/main/docs/api.md#gen
 
 ```ruby
 result = client.generate(
-  { model: 'dolphin-phi',
+  { model: 'llama2',
     prompt: 'Hi!',
     stream: false }
 )
@@ -121,21 +121,20 @@ result = client.generate(
 
 Result:
 ```ruby
-[{ 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T17:47:26.443128626Z',
-   'response' =>
-     "Hello! How can I assist you today? Do you have any questions or problems that you'd like help with?",
+[{ 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:35:41.951371247Z',
+   'response' => "Hi there! It's nice to meet you. How are you today?",
    'done' => true,
    'context' =>
-     [50_296, 10_057,
+     [518, 25_580,
       # ...
-      351, 30],
-   'total_duration' => 6_495_278_960,
-   'load_duration' => 1_434_052_851,
-   'prompt_eval_count' => 25,
-   'prompt_eval_duration' => 1_938_861_000,
-   'eval_count' => 23,
-   'eval_duration' => 3_119_030_000 }]
+      9826, 29_973],
+   'total_duration' => 6_981_097_576,
+   'load_duration' => 625_053,
+   'prompt_eval_count' => 22,
+   'prompt_eval_duration' => 4_075_171_000,
+   'eval_count' => 16,
+   'eval_duration' => 2_900_325_000 }]
 ```
 
 ##### Receiving Stream Events
@@ -146,7 +145,7 @@ Ensure that you have enabled [Server-Sent Events](#streaming-and-server-sent-eve
 
 ```ruby
 client.generate(
-  { model: 'dolphin-phi',
+  { model: 'llama2',
     prompt: 'Hi!' }
 ) do |event, raw|
   puts event
@@ -155,8 +154,8 @@ end
 
 Event:
 ```ruby
-{ 'model' => 'dolphin-phi',
-  'created_at' => '2024-01-06T17:27:29.366879586Z',
+{ 'model' => 'llama2',
+  'created_at' => '2024-01-07T01:36:30.665245712Z',
   'response' => 'Hello',
   'done' => false }
 ```
@@ -164,46 +163,46 @@ Event:
 You can get all the receive events at once as an array:
 ```ruby
 result = client.generate(
-  { model: 'dolphin-phi',
+  { model: 'llama2',
     prompt: 'Hi!' }
 )
 ```
 
 Result:
 ```ruby
-[{ 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T16:53:21.357816652Z',
+[{ 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:36:30.665245712Z',
    'response' => 'Hello',
    'done' => false },
- { 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T16:53:21.490053654Z',
+ { 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:36:30.927337136Z',
    'response' => '!',
    'done' => false },
  # ...
- { 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T16:53:24.82505599Z',
-   'response' => '.',
+ { 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:36:37.249416767Z',
+   'response' => '?',
    'done' => false },
- { 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T16:53:24.956774721Z',
+ { 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:36:37.44041283Z',
    'response' => '',
    'done' => true,
    'context' =>
-     [50_296, 10_057,
+     [518, 25_580,
       # ...
-      1037, 13],
-   'total_duration' => 5_702_027_026,
-   'load_duration' => 649_711,
-   'prompt_eval_count' => 25,
-   'prompt_eval_duration' => 2_227_159_000,
-   'eval_count' => 39,
-   'eval_duration' => 3_466_593_000 }]
+      13_563, 29_973],
+   'total_duration' => 10_551_395_645,
+   'load_duration' => 966_631,
+   'prompt_eval_count' => 22,
+   'prompt_eval_duration' => 4_034_990_000,
+   'eval_count' => 25,
+   'eval_duration' => 6_512_954_000 }]
 ```
 
 You can mix both as well:
 ```ruby
 result = client.generate(
-  { model: 'dolphin-phi',
+  { model: 'llama2',
     prompt: 'Hi!' }
 ) do |event, raw|
   puts event
@@ -216,7 +215,7 @@ API Documentation: https://github.com/jmorganca/ollama/blob/main/docs/api.md#gen
 
 ```ruby
 result = client.chat(
-  { model: 'dolphin-phi',
+  { model: 'llama2',
     messages: [
       { role: 'user', content: 'Hi! My name is Purple.' }
     ] }
@@ -227,37 +226,37 @@ end
 
 Event:
 ```ruby
-{ 'model' => 'dolphin-phi',
-  'created_at' => '2024-01-06T18:17:22.468231988Z',
-  'message' => { 'role' => 'assistant', 'content' => 'Hello' },
+{ 'model' => 'llama2',
+  'created_at' => '2024-01-07T01:38:01.729897311Z',
+  'message' => { 'role' => 'assistant', 'content' => "\n" },
   'done' => false }
 ```
 
 Result:
 ```ruby
-[{ 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T18:17:22.468231988Z',
-   'message' => { 'role' => 'assistant', 'content' => 'Hello' },
+[{ 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:38:01.729897311Z',
+   'message' => { 'role' => 'assistant', 'content' => "\n" },
    'done' => false },
- { 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T18:17:22.594414415Z',
-   'message' => { 'role' => 'assistant', 'content' => ' Purple' },
+ { 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:38:02.081494506Z',
+   'message' => { 'role' => 'assistant', 'content' => '*' },
    'done' => false },
  # ...
- { 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T18:17:25.491597233Z',
+ { 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:38:17.855905499Z',
    'message' => { 'role' => 'assistant', 'content' => '?' },
    'done' => false },
- { 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T18:17:25.578463723Z',
+ { 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:38:18.07331245Z',
    'message' => { 'role' => 'assistant', 'content' => '' },
    'done' => true,
-   'total_duration' => 5_274_177_696,
-   'load_duration' => 1_565_325,
-   'prompt_eval_count' => 30,
-   'prompt_eval_duration' => 2_284_638_000,
-   'eval_count' => 29,
-   'eval_duration' => 2_983_962_000 }]
+   'total_duration' => 22_494_544_502,
+   'load_duration' => 4_224_600,
+   'prompt_eval_count' => 28,
+   'prompt_eval_duration' => 6_496_583_000,
+   'eval_count' => 61,
+   'eval_duration' => 15_991_728_000 }]
 ```
 
 ##### Back-and-Forth Conversations
@@ -268,11 +267,11 @@ To maintain a back-and-forth conversation, you need to append the received respo
 
 ```ruby
 result = client.chat(
-  { model: 'dolphin-phi',
+  { model: 'llama2',
     messages: [
       { role: 'user', content: 'Hi! My name is Purple.' },
       { role: 'assistant',
-        content: "Hi, Purple! It's nice to meet you. I am Dolphin. How can I help you today?" },
+        content: 'Hi, Purple!' },
       { role: 'user', content: "What's my name?" }
     ] }
 ) do |event, raw|
@@ -283,37 +282,41 @@ end
 Event:
 
 ```ruby
-{ 'model' => 'dolphin-phi',
-  'created_at' => '2024-01-06T19:07:51.05465997Z',
-  'message' => { 'role' => 'assistant', 'content' => 'Your' },
+{ 'model' => 'llama2',
+  'created_at' => '2024-01-07T01:40:07.352998498Z',
+  'message' => { 'role' => 'assistant', 'content' => ' Pur' },
   'done' => false }
 ```
 
 Result:
 ```ruby
-[{ 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T19:07:51.05465997Z',
+[{ 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:40:06.562939469Z',
    'message' => { 'role' => 'assistant', 'content' => 'Your' },
    'done' => false },
- { 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T19:07:51.184476541Z',
-   'message' => { 'role' => 'assistant', 'content' => ' name' },
-   'done' => false },
  # ...
- { 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T19:07:56.526297223Z',
-   'message' => { 'role' => 'assistant', 'content' => '.' },
+ { 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:40:07.352998498Z',
+   'message' => { 'role' => 'assistant', 'content' => ' Pur' },
    'done' => false },
- { 'model' => 'dolphin-phi',
-   'created_at' => '2024-01-06T19:07:56.667809424Z',
+ { 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:40:07.545323584Z',
+   'message' => { 'role' => 'assistant', 'content' => 'ple' },
+   'done' => false },
+ { 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:40:07.77769408Z',
+   'message' => { 'role' => 'assistant', 'content' => '!' },
+   'done' => false },
+ { 'model' => 'llama2',
+   'created_at' => '2024-01-07T01:40:07.974165849Z',
    'message' => { 'role' => 'assistant', 'content' => '' },
    'done' => true,
-   'total_duration' => 12_169_557_266,
-   'load_duration' => 4_486_689,
-   'prompt_eval_count' => 95,
-   'prompt_eval_duration' => 6_678_566_000,
-   'eval_count' => 40,
-   'eval_duration' => 5_483_133_000 }]
+   'total_duration' => 11_482_012_681,
+   'load_duration' => 4_246_882,
+   'prompt_eval_count' => 57,
+   'prompt_eval_duration' => 10_387_150_000,
+   'eval_count' => 6,
+   'eval_duration' => 1_089_249_000 }]
 ```
 
 #### embeddings: Generate Embeddings
@@ -322,7 +325,7 @@ API Documentation: https://github.com/jmorganca/ollama/blob/main/docs/api.md#gen
 
 ```ruby
 result = client.embeddings(
-  { model: 'dolphin-phi',
+  { model: 'llama2',
     prompt: 'Hi!' }
 )
 ```
@@ -330,11 +333,9 @@ result = client.embeddings(
 Result:
 ```ruby
 [{ 'embedding' =>
-   [1.0372048616409302,
-    1.0635842084884644,
+   [0.6970467567443848, -2.248202085494995,
     # ...
-    -0.5416496396064758,
-    0.051569778472185135] }]
+    -1.5994540452957153, -0.3464218080043793] }]
 ```
 
 #### Models
@@ -346,7 +347,7 @@ API Documentation: https://github.com/jmorganca/ollama/blob/main/docs/api.md#cre
 ```ruby
 result = client.create(
   { name: 'mario',
-    modelfile: "FROM dolphin-phi\nSYSTEM You are mario from Super Mario Bros." }
+    modelfile: "FROM llama2\nSYSTEM You are mario from Super Mario Bros." }
 ) do |event, raw|
   puts event
 end
@@ -387,9 +388,7 @@ client.generate(
 end
 ```
 
-> _Hello! I'm Mario, a character from the popular video game series Super Mario Bros. My goal is to rescue Princess Peach from the evil Bowser and his minions, so we can live happily ever after in the Mushroom Kingdom! 🍄🐥_
-> 
-> _What brings you here? How can I help you on your journey?_
+> _Woah! *adjusts sunglasses* It's-a me, Mario! *winks* You must be a new friend I've-a met here in the Mushroom Kingdom. *tips top hat* What brings you to this neck of the woods? Maybe you're looking for-a some help on your adventure? *nods* Just let me know, and I'll do my best to-a assist ya! 😃_
 
 ##### tags: List Local Models
 
@@ -402,28 +401,28 @@ result = client.tags
 Result:
 ```ruby
 [{ 'models' =>
-   [{ 'name' => 'dolphin-phi:latest',
-      'modified_at' => '2024-01-06T12:20:42.778120982-03:00',
-      'size' => 1_602_473_850,
+   [{ 'name' => 'llama2:latest',
+      'modified_at' => '2024-01-06T15:06:23.6349195-03:00',
+      'size' => 3_826_793_677,
       'digest' =>
-       'c5761fc772409945787240af89a5cce01dd39dc52f1b7b80d080a1163e8dbe10',
+      '78e26419b4469263f75331927a00a0284ef6544c1975b826b15abdaef17bb962',
       'details' =>
-        { 'format' => 'gguf',
-          'family' => 'phi2',
-          'families' => ['phi2'],
-          'parameter_size' => '3B',
-          'quantization_level' => 'Q4_0' } },
+      { 'format' => 'gguf',
+        'family' => 'llama',
+        'families' => ['llama'],
+        'parameter_size' => '7B',
+        'quantization_level' => 'Q4_0' } },
     { 'name' => 'mario:latest',
-      'modified_at' => '2024-01-06T16:19:11.340234644-03:00',
-      'size' => 1_602_473_846,
+      'modified_at' => '2024-01-06T22:41:59.495298101-03:00',
+      'size' => 3_826_793_787,
       'digest' =>
-        '582e668feaba3fcb6add3cee26046a1d6a0c940b86a692ea30d5100aec90135f',
+      '291f46d2fa687dfaff45de96a8cb6e32707bc16ec1e1dfe8d65e9634c34c660c',
       'details' =>
-        { 'format' => 'gguf',
-          'family' => 'phi2',
-          'families' => ['phi2'],
-          'parameter_size' => '3B',
-          'quantization_level' => 'Q4_0' } }] }]
+      { 'format' => 'gguf',
+        'family' => 'llama',
+        'families' => ['llama'],
+        'parameter_size' => '7B',
+        'quantization_level' => 'Q4_0' } }] }]
 ```
 
 ##### show: Show Model Information
@@ -432,35 +431,33 @@ API Documentation: https://github.com/jmorganca/ollama/blob/main/docs/api.md#sho
 
 ```ruby
 result = client.show(
-  { name: 'dolphin-phi' }
+  { name: 'llama2' }
 )
 ```
 
 Result:
 ```ruby
 [{ 'license' =>
-     "MICROSOFT RESEARCH LICENSE TERMS\n" \
+     "LLAMA 2 COMMUNITY LICENSE AGREEMENT\t\n" \
      # ...
-     'It also applies even if Microsoft knew or should have known about the possibility...',
+     "* Reporting violations of the Acceptable Use Policy or unlicensed uses of Llama..." \
+     "\n",
    'modelfile' =>
      "# Modelfile generated by \"ollama show\"\n" \
      # ...
-     'PARAMETER stop "<|im_end|>"',
+     'PARAMETER stop "<</SYS>>"',
    'parameters' =>
-     "stop                           <|im_start|>\n" \
-     'stop                           <|im_end|>',
-   'template' =>
-     "<|im_start|>system\n" \
-     "{{ .System }}<|im_end|>\n" \
-     "<|im_start|>user\n" \
-     "{{ .Prompt }}<|im_end|>\n" \
-     "<|im_start|>assistant\n",
-   'system' => 'You are Dolphin, a helpful AI assistant.',
+     "stop                           [INST]\n" \
+     "stop                           [/INST]\n" \
+     "stop                           <<SYS>>\n" \
+     'stop                           <</SYS>>',
+     'template' =>
+     "[INST] <<SYS>>{{ .System }}<</SYS>>\n\n{{ .Prompt }} [/INST]\n",
    'details' =>
      { 'format' => 'gguf',
-       'family' => 'phi2',
-       'families' => ['phi2'],
-       'parameter_size' => '3B',
+       'family' => 'llama',
+       'families' => ['llama'],
+       'parameter_size' => '7B',
        'quantization_level' => 'Q4_0' } }]
 ```
 
@@ -470,8 +467,8 @@ API Documentation: https://github.com/jmorganca/ollama/blob/main/docs/api.md#cop
 
 ```ruby
 result = client.copy(
-  { source: 'dolphin-phi',
-    destination: 'dolphin-phi-backup' }
+  { source: 'llama2',
+    destination: 'llama2-backup' }
 )
 ```
 
@@ -508,7 +505,7 @@ API Documentation: https://github.com/jmorganca/ollama/blob/main/docs/api.md#del
 
 ```ruby
 result = client.delete(
-  { name: 'dolphin-phi' }
+  { name: 'llama2' }
 )
 ```
 
@@ -521,14 +518,14 @@ If the model does not exist:
 ```ruby
 begin
   result = client.delete(
-    { name: 'dolphin-phi' }
+    { name: 'llama2' }
   )
 rescue Ollama::Errors::OllamaError => error
   puts error.class # Ollama::Errors::RequestError
   puts error.message # 'the server responded with status 404'
 
   puts error.payload
-  # { name: 'dolphin-phi',
+  # { name: 'llama2',
   #   ...
   # }
 
@@ -543,7 +540,7 @@ API Documentation: https://github.com/jmorganca/ollama/blob/main/docs/api.md#pul
 
 ```ruby
 result = client.pull(
-  { name: 'dolphin-phi' }
+  { name: 'llama2' }
 ) do |event, raw|
   puts event
 end
@@ -703,7 +700,7 @@ client = Ollama.new(
 Or, you can decide on a request basis:
 ```ruby
 result = client.generate(
-  { model: 'dolphin-phi',
+  { model: 'llama2',
     prompt: 'Hi!' },
   server_sent_events: true
 ) do |event, raw|
@@ -724,7 +721,7 @@ Ollama may launch a new endpoint that we haven't covered in the Gem yet. If that
 ```ruby
 result = client.request(
   'api/generate',
-  { model: 'dolphin-phi',
+  { model: 'llama2',
     prompt: 'Hi!' },
   request_method: 'POST', server_sent_events: true
 )
@@ -770,7 +767,7 @@ require 'ollama-ai'
 
 begin
   client.chat_completions(
-    { model: 'dolphin-phi',
+    { model: 'llama2',
       prompt: 'Hi!' }
   )
 rescue Ollama::Errors::OllamaError => error
@@ -778,7 +775,7 @@ rescue Ollama::Errors::OllamaError => error
   puts error.message # 'the server responded with status 500'
 
   puts error.payload
-  # { model: 'dolphin-phi',
+  # { model: 'llama2',
   #   prompt: 'Hi!',
   #   ...
   # }
@@ -795,7 +792,7 @@ require 'ollama-ai/errors'
 
 begin
   client.chat_completions(
-    { model: 'dolphin-phi',
+    { model: 'llama2',
       prompt: 'Hi!' }
   )
 rescue OllamaError => error
