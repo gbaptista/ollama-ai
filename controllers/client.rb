@@ -3,7 +3,7 @@
 require 'faraday'
 require 'json'
 
-require_relative '../ports/dsl/ollama-ai/errors'
+require_relative '../components/errors'
 
 module Ollama
   module Controllers
@@ -79,7 +79,7 @@ module Ollama
         url = "#{@address}#{path}"
 
         if !callback.nil? && !server_sent_events_enabled
-          raise BlockWithoutServerSentEventsError,
+          raise Errors::BlockWithoutServerSentEventsError,
                 'You are trying to use a block without Server Sent Events (SSE) enabled.'
         end
 
@@ -125,7 +125,7 @@ module Ollama
 
         results.map { |result| result[:event] }
       rescue Faraday::Error => e
-        raise RequestError.new(e.message, request: e, payload:)
+        raise Errors::RequestError.new(e.message, request: e, payload:)
       end
 
       def safe_parse_json(raw)
