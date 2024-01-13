@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'ollama-ai'
+require_relative '../../ports/dsl/ollama-ai'
 
 begin
   client = Ollama.new(
