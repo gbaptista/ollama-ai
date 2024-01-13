@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ollama-ai (1.0.0)
+    ollama-ai (1.0.1)
       faraday (~> 2.9)
 
 GEM
