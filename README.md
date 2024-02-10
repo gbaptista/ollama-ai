@@ -62,40 +62,41 @@ Result:
 - [TL;DR and Quick Start](#tldr-and-quick-start)
 - [Index](#index)
 - [Setup](#setup)
-    - [Installing](#installing)
+  - [Installing](#installing)
 - [Usage](#usage)
-    - [Client](#client)
-    - [Methods](#methods)
-        - [generate: Generate a completion](#generate-generate-a-completion)
-            - [Without Streaming Events](#without-streaming-events)
-            - [Receiving Stream Events](#receiving-stream-events)
-        - [chat: Generate a chat completion](#chat-generate-a-chat-completion)
-            - [Back-and-Forth Conversations](#back-and-forth-conversations)
-        - [embeddings: Generate Embeddings](#embeddings-generate-embeddings)
-        - [Models](#models)
-            - [create: Create a Model](#create-create-a-model)
-            - [tags: List Local Models](#tags-list-local-models)
-            - [show: Show Model Information](#show-show-model-information)
-            - [copy: Copy a Model](#copy-copy-a-model)
-            - [delete: Delete a Model](#delete-delete-a-model)
-            - [pull: Pull a Model](#pull-pull-a-model)
-            - [push: Push a Model](#push-push-a-model)
-    - [Modes](#modes)
-        - [Text](#text)
-        - [Image](#image)
-    - [Streaming and Server-Sent Events (SSE)](#streaming-and-server-sent-events-sse)
-        - [Server-Sent Events (SSE) Hang](#server-sent-events-sse-hang)
-    - [New Functionalities and APIs](#new-functionalities-and-apis)
-    - [Request Options](#request-options)
-        - [Timeout](#timeout)
-    - [Error Handling](#error-handling)
-        - [Rescuing](#rescuing)
-        - [For Short](#for-short)
-        - [Errors](#errors)
+  - [Client](#client)
+  - [Methods](#methods)
+    - [generate: Generate a completion](#generate-generate-a-completion)
+      - [Without Streaming Events](#without-streaming-events)
+      - [Receiving Stream Events](#receiving-stream-events)
+    - [chat: Generate a chat completion](#chat-generate-a-chat-completion)
+      - [Back-and-Forth Conversations](#back-and-forth-conversations)
+    - [embeddings: Generate Embeddings](#embeddings-generate-embeddings)
+    - [Models](#models)
+      - [create: Create a Model](#create-create-a-model)
+      - [tags: List Local Models](#tags-list-local-models)
+      - [show: Show Model Information](#show-show-model-information)
+      - [copy: Copy a Model](#copy-copy-a-model)
+      - [delete: Delete a Model](#delete-delete-a-model)
+      - [pull: Pull a Model](#pull-pull-a-model)
+      - [push: Push a Model](#push-push-a-model)
+  - [Modes](#modes)
+    - [Text](#text)
+    - [Image](#image)
+  - [Streaming and Server-Sent Events (SSE)](#streaming-and-server-sent-events-sse)
+    - [Server-Sent Events (SSE) Hang](#server-sent-events-sse-hang)
+  - [New Functionalities and APIs](#new-functionalities-and-apis)
+  - [Request Options](#request-options)
+    - [Adapter](#adapter)
+    - [Timeout](#timeout)
+  - [Error Handling](#error-handling)
+    - [Rescuing](#rescuing)
+    - [For Short](#for-short)
+    - [Errors](#errors)
 - [Development](#development)
-    - [Purpose](#purpose)
-    - [Publish to RubyGems](#publish-to-rubygems)
-    - [Updating the README](#updating-the-readme)
+  - [Purpose](#purpose)
+  - [Publish to RubyGems](#publish-to-rubygems)
+  - [Updating the README](#updating-the-readme)
 - [Resources and References](#resources-and-references)
 - [Disclaimer](#disclaimer)
 
@@ -766,6 +767,21 @@ result = client.request(
 ```
 
 ### Request Options
+
+#### Adapter
+
+The gem uses [Faraday](https://github.com/lostisland/faraday) with the [Typhoeus](https://github.com/typhoeus/typhoeus) adapter by default.
+
+You can use a different adapter if you want:
+
+```ruby
+require 'faraday/net_http'
+
+client = Ollama.new(
+  credentials: { address: 'http://localhost:11434' },
+  options: { connection: { adapter: :net_http } }
+)
+```
 
 #### Timeout
 

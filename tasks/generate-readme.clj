@@ -23,7 +23,7 @@
                              (remove nil?))]
     (->> processed-lines
          (map (fn [{:keys [level title link]}]
-                (str (apply str (repeat (* 4 (- level 2)) " "))
+                (str (apply str (repeat (* 2 (- level 2)) " "))
                      "- ["
                      title
                      "](#"
