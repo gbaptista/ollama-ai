@@ -3,7 +3,7 @@
 module Ollama
   GEM = {
     name: 'ollama-ai',
-    version: '1.0.1',
+    version: '1.2.0',
     author: 'gbaptista',
     summary: 'Interact with Ollama API to run open source AI models locally.',
     description: "A Ruby gem for interacting with Ollama's API that allows you to run open source AI LLMs (Large Language Models) locally.",

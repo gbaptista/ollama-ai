@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ollama-ai (1.0.1)
+    ollama-ai (1.2.0)
       faraday (~> 2.9)
       faraday-typhoeus (~> 1.1)
 
