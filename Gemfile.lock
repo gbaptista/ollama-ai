@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ollama-ai (1.2.0)
+    ollama-ai (1.2.1)
       faraday (~> 2.9)
       faraday-typhoeus (~> 1.1)
 
@@ -21,7 +21,7 @@ GEM
       faraday (~> 2.0)
       typhoeus (~> 1.4)
     ffi (1.16.3)
-    json (2.7.1)
+    json (2.7.2)
     language_server-protocol (3.17.0.3)
     method_source (1.0.0)
     net-http (0.4.1)
@@ -40,7 +40,7 @@ GEM
     rainbow (3.1.1)
     regexp_parser (2.9.0)
     rexml (3.2.6)
-    rubocop (1.60.2)
+    rubocop (1.63.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
@@ -48,11 +48,11 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.30.0, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.30.0)
-      parser (>= 3.2.1.0)
+    rubocop-ast (1.31.2)
+      parser (>= 3.3.0.4)
     ruby-progressbar (1.13.0)
     typhoeus (1.4.1)
       ethon (>= 0.9.0)
@@ -65,7 +65,7 @@ PLATFORMS
 DEPENDENCIES
   ollama-ai!
   pry-byebug (~> 3.10, >= 3.10.1)
-  rubocop (~> 1.60, >= 1.60.2)
+  rubocop (~> 1.63, >= 1.63.1)
 
 BUNDLED WITH
    2.4.22
