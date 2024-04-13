@@ -92,7 +92,7 @@ module Ollama
 
         method_to_call = request_method.to_s.strip.downcase.to_sym
 
-        partial_json = ''
+        partial_json = String.new.force_encoding('UTF-8')
 
         response = Faraday.new(request: @request_options) do |faraday|
           faraday.adapter @faraday_adapter
@@ -110,7 +110,13 @@ module Ollama
                 raise_error.on_complete(env.merge(body: chunk))
               end
 
-              partial_json += chunk
+              utf8_chunk = chunk.force_encoding('UTF-8')
+
+              partial_json += if utf8_chunk.valid_encoding?
+                                utf8_chunk
+                              else
+                                utf8_chunk.encode('UTF-8', invalid: :replace, undef: :replace)
+                              end
 
               parsed_json = safe_parse_json(partial_json)
 
@@ -121,7 +127,7 @@ module Ollama
 
                 results << result
 
-                partial_json = ''
+                partial_json = String.new.force_encoding('UTF-8')
               end
             end
           end
