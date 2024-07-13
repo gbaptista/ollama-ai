@@ -60,6 +60,7 @@ GEM
     uri (0.13.0)
 
 PLATFORMS
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
