@@ -23,6 +23,7 @@ module Ollama
                    else
                      "#{config[:credentials][:address].to_s.sub(%r{/$}, '')}/"
                    end
+        @bearer_token = config[:credentials][:bearer_token]
 
         @request_options = config.dig(:options, :connection, :request)
 
@@ -97,6 +98,7 @@ module Ollama
         response = Faraday.new(request: @request_options) do |faraday|
           faraday.adapter @faraday_adapter
           faraday.response :raise_error
+          faraday.request :authorization, 'Bearer', @bearer_token if @bearer_token
         end.send(method_to_call) do |request|
           request.url url
           request.headers['Content-Type'] = 'application/json'

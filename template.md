@@ -87,6 +87,17 @@ client = Ollama.new(
 )
 ```
 
+If your server protected with Bearer token, you could pass it in configs:
+
+```ruby
+require 'ollama-ai'
+
+client = Ollama.new(
+  credentials: { address: 'http://localhost:11434', bearer_token: <your_token> },
+  options: { server_sent_events: true }
+)
+```
+
 ### Methods
 
 ```ruby
