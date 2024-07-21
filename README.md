@@ -65,6 +65,7 @@ Result:
   - [Installing](#installing)
 - [Usage](#usage)
   - [Client](#client)
+    - [Bearer Authentication](#bearer-authentication)
   - [Methods](#methods)
     - [generate: Generate a completion](#generate-generate-a-completion)
       - [Without Streaming Events](#without-streaming-events)
@@ -126,13 +127,30 @@ client = Ollama.new(
 )
 ```
 
-If your server protected with Bearer token, you could pass it in configs:
+#### Bearer Authentication
 
 ```ruby
 require 'ollama-ai'
 
 client = Ollama.new(
-  credentials: { address: 'http://localhost:11434', bearer_token: <your_token> },
+  credentials: {
+    address: 'http://localhost:11434',
+    bearer_token: 'eyJhbG...Qssw5c'
+  },
+  options: { server_sent_events: true }
+)
+```
+
+Remember that hardcoding your credentials in code is unsafe. It's preferable to use environment variables:
+
+```ruby
+require 'ollama-ai'
+
+client = Ollama.new(
+  credentials: {
+    address: 'http://localhost:11434',
+    bearer_token: ENV['OLLAMA_BEARER_TOKEN']
+  },
   options: { server_sent_events: true }
 )
 ```

@@ -23,6 +23,7 @@ module Ollama
                    else
                      "#{config[:credentials][:address].to_s.sub(%r{/$}, '')}/"
                    end
+
         @bearer_token = config[:credentials][:bearer_token]
 
         @request_options = config.dig(:options, :connection, :request)
