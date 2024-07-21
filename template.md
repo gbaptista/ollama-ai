@@ -9,7 +9,7 @@ A Ruby gem for interacting with [Ollama](https://ollama.ai)'s API that allows yo
 ## TL;DR and Quick Start
 
 ```ruby
-gem 'ollama-ai', '~> 1.2.1'
+gem 'ollama-ai', '~> 1.3.0'
 ```
 
 ```ruby
@@ -66,11 +66,11 @@ Result:
 ### Installing
 
 ```sh
-gem install ollama-ai -v 1.2.1
+gem install ollama-ai -v 1.3.0
 ```
 
 ```sh
-gem 'ollama-ai', '~> 1.2.1'
+gem 'ollama-ai', '~> 1.3.0'
 ```
 
 ## Usage
@@ -874,7 +874,7 @@ gem build ollama-ai.gemspec
 
 gem signin
 
-gem push ollama-ai-1.2.1.gem
+gem push ollama-ai-1.3.0.gem
 ```
 
 ### Updating the README

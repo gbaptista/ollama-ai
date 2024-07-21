@@ -4,7 +4,7 @@ module Ollama
   module Errors
     class OllamaError < StandardError
       def initialize(message = nil)
-        super(message)
+        super
       end
     end
 

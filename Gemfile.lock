@@ -1,9 +1,10 @@
 PATH
   remote: .
   specs:
-    ollama-ai (1.2.1)
-      faraday (~> 2.9)
+    ollama-ai (1.3.0)
+      faraday (~> 2.10)
       faraday-typhoeus (~> 1.1)
+      typhoeus (~> 1.4, >= 1.4.1)
 
 GEM
   remote: https://rubygems.org/
@@ -13,21 +14,23 @@ GEM
     coderay (1.1.3)
     ethon (0.16.0)
       ffi (>= 1.15.0)
-    faraday (2.9.0)
+    faraday (2.10.0)
       faraday-net_http (>= 2.0, < 3.2)
+      logger
     faraday-net_http (3.1.0)
       net-http
     faraday-typhoeus (1.1.0)
       faraday (~> 2.0)
       typhoeus (~> 1.4)
-    ffi (1.16.3)
+    ffi (1.17.0)
     json (2.7.2)
     language_server-protocol (3.17.0.3)
-    method_source (1.0.0)
+    logger (1.6.0)
+    method_source (1.1.0)
     net-http (0.4.1)
       uri
-    parallel (1.24.0)
-    parser (3.3.0.5)
+    parallel (1.25.1)
+    parser (3.3.4.0)
       ast (~> 2.4.1)
       racc
     pry (0.14.2)
@@ -36,24 +39,26 @@ GEM
     pry-byebug (3.10.1)
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
-    racc (1.7.3)
+    racc (1.8.0)
     rainbow (3.1.1)
-    regexp_parser (2.9.0)
-    rexml (3.2.6)
-    rubocop (1.63.1)
+    regexp_parser (2.9.2)
+    rexml (3.3.2)
+      strscan
+    rubocop (1.65.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
       parser (>= 3.3.0.2)
       rainbow (>= 2.2.2, < 4.0)
-      regexp_parser (>= 1.8, < 3.0)
+      regexp_parser (>= 2.4, < 3.0)
       rexml (>= 3.2.5, < 4.0)
       rubocop-ast (>= 1.31.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.31.2)
-      parser (>= 3.3.0.4)
+    rubocop-ast (1.31.3)
+      parser (>= 3.3.1.0)
     ruby-progressbar (1.13.0)
+    strscan (3.1.0)
     typhoeus (1.4.1)
       ethon (>= 0.9.0)
     unicode-display_width (2.5.0)
@@ -66,7 +71,7 @@ PLATFORMS
 DEPENDENCIES
   ollama-ai!
   pry-byebug (~> 3.10, >= 3.10.1)
-  rubocop (~> 1.63, >= 1.63.1)
+  rubocop (~> 1.65)
 
 BUNDLED WITH
    2.4.22
