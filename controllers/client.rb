@@ -14,6 +14,7 @@ module Ollama
       ALLOWED_REQUEST_OPTIONS = %i[timeout open_timeout read_timeout write_timeout].freeze
 
       DEFAULT_FARADAY_ADAPTER = :typhoeus
+      DEFAULT_FARADAY_RESPONSE = :raise_error
 
       def initialize(config)
         @server_sent_events = config.dig(:options, :server_sent_events)
@@ -37,6 +38,7 @@ module Ollama
                            end
 
         @faraday_adapter = config.dig(:options, :connection, :adapter) || DEFAULT_FARADAY_ADAPTER
+        @faraday_response = config.dig(:options, :connection, :response) || DEFAULT_FARADAY_RESPONSE
       end
 
       def generate(payload, server_sent_events: nil, &callback)
@@ -96,11 +98,7 @@ module Ollama
 
         partial_json = String.new.force_encoding('UTF-8')
 
-        response = Faraday.new(request: @request_options) do |faraday|
-          faraday.adapter @faraday_adapter
-          faraday.response :raise_error
-          faraday.request :authorization, 'Bearer', @bearer_token if @bearer_token
-        end.send(method_to_call) do |request|
+        response = faraday.send(method_to_call) do |request|
           request.url url
           request.headers['Content-Type'] = 'application/json'
 
@@ -141,6 +139,14 @@ module Ollama
         results.map { |result| result[:event] }
       rescue Faraday::Error => e
         raise Errors::RequestError.new(e.message, request: e, payload:)
+      end
+
+      def faraday
+        Faraday.new(request: @request_options) do |faraday|
+          faraday.adapter *@faraday_adapter
+          faraday.response *@faraday_response
+          faraday.request :authorization, 'Bearer', @bearer_token if @bearer_token
+        end
       end
 
       def safe_parse_json(raw)

@@ -32,6 +32,9 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'faraday', '~> 2.10'
   spec.add_dependency 'faraday-typhoeus', '~> 1.1'
   spec.add_dependency 'typhoeus', '~> 1.4', '>= 1.4.1'
+  spec.add_development_dependency 'pry-byebug', '~> 3.10', '>= 3.10.1'
+  spec.add_development_dependency 'rubocop', '~> 1.65'
+  spec.add_development_dependency 'rspec', '~> 3.13'
 
   spec.metadata['rubygems_mfa_required'] = 'true'
 end

@@ -893,14 +893,95 @@ BlockWithoutServerSentEventsError
 RequestError
 ```
 
+## Testing
+
+You can stub network requests for testing using Faraday stubs. It is simplest to stub if you set `server_sent_events: false`. For instance, the following example works:
+
+```ruby
+RSpec.describe Ollama do
+  let(:messages) { [{ role: "user", content: "What is the meaning of life?"}] }
+
+  let(:request_body) {
+    {
+      model: "phi",
+      system: "You are a helpful assistant.",
+      messages: messages
+    }  
+  }
+
+  let(:stubs) {
+    stubs = Faraday::Adapter::Test::Stubs.new
+    stubs.post("http://localhost:11434/api/chat", request_body.to_json, { "Content-Type" => "application/json" }) do |env|
+      [
+        200,
+        { "Content-Type" => "application/json; charset=utf-8" },
+        { message: { content: "Forty two", role: "assistant" } }.to_json
+      ]
+    end
+    stubs
+  }
+
+  let(:client) { 
+    Ollama.new(
+      credentials: { address: 'http://localhost:11434' }, 
+      options: {
+        server_sent_events: false,
+        connection: {
+          adapter: [:test, stubs]
+        }
+      }
+    ) 
+  }
+
+  describe '#chat' do
+    it 'should respond with the correct message' do
+      response = client.chat(request_body)
+      expect(response.dig(0, "message", "content")).to eq("Forty two")
+    end
+  end
+end
+```
+
+## Logging
+
+It can occasionally be helpful to see the http requests that pass through Faraday. You can gain some visibility using the Faraday response option. Again, it works better when `server_sent_events: false`. You can configure it using:
+
+```ruby
+Ollama.new(
+  credentials: { address: 'http://localhost:11434' }, 
+  options: {
+    server_sent_events: false,
+    connection: {
+      response: [:logger, ::Logger.new(STDOUT), bodies: true]
+    }
+  }
+) 
+```
+
+With logging enabled to STDOUT, you will see output like:
+
+```
+I, [2024-08-23T15:41:53.600813 #21065]  INFO -- request: POST http://localhost:11434/api/chat
+I, [2024-08-23T15:41:53.600846 #21065]  INFO -- request: User-Agent: "Faraday v2.10.0"
+Content-Type: "application/json"
+I, [2024-08-23T15:41:53.600865 #21065]  INFO -- request: {"model":"phi","system":"You are a helpful assistant.","messages":[{"role":"user","content":"What is the meaning of life?"}]}
+I, [2024-08-23T15:41:53.600982 #21065]  INFO -- response: Status 200
+I, [2024-08-23T15:41:53.600992 #21065]  INFO -- response: Content-Type: "application/json; charset=utf-8"
+I, [2024-08-23T15:41:53.600999 #21065]  INFO -- response: {"message":{"content":"Forty two","role":"assistant"}}
+```
+
 ## Development
 
 ```bash
 bundle
 rubocop -A
 
-bundle exec ruby spec/tasks/run-client.rb
-bundle exec ruby spec/tasks/test-encoding.rb
+# one time
+ollama pull phi
+ollama pull yi:latest
+
+ollama serve
+bundle exec rspec
 ```
 
 ### Purpose
