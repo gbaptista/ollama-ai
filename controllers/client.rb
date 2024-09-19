@@ -26,6 +26,16 @@ module Ollama
 
         @bearer_token = config[:credentials][:bearer_token]
 
+        @basic_auth_username = nil
+        @basic_auth_password = nil
+
+        if config[:credentials].key?(:basic_auth) && config[:credentials][:basic_auth].is_a?(Hash)
+          @basic_auth_username = config[:credentials][:basic_auth][:username] if config[:credentials][:basic_auth].key?(:username)
+          @basic_auth_password = config[:credentials][:basic_auth][:password] if config[:credentials][:basic_auth].key?(:password)
+        elsif config[:credentials].key?(:basic_auth) && config[:credentials][:basic_auth].is_a?(String)
+          @basic_auth_username, @basic_auth_password = config[:credentials][:basic_auth].to_s.split(':')
+        end
+
         @request_options = config.dig(:options, :connection, :request)
 
         @request_options = if @request_options.is_a?(Hash)
@@ -100,6 +110,9 @@ module Ollama
           faraday.adapter @faraday_adapter
           faraday.response :raise_error
           faraday.request :authorization, 'Bearer', @bearer_token if @bearer_token
+          if @basic_auth_username && @basic_auth_password
+            faraday.request :authorization, :basic, @basic_auth_username, @basic_auth_password
+          end
         end.send(method_to_call) do |request|
           request.url url
           request.headers['Content-Type'] = 'application/json'

@@ -155,6 +155,62 @@ client = Ollama.new(
 )
 ```
 
+#### Basic Authentication
+
+This accepts a string in the format `username:password`:
+
+```ruby
+require 'ollama-ai'
+
+client = Ollama.new(
+  credentials: {
+    address: 'http://localhost:11434',
+    basic_auth: 'usrname:passwd'
+  },
+  options: { server_sent_events: true }
+)
+```
+
+We also accept a hash with the keys `username` and `password`:
+
+```ruby
+require 'ollama-ai'
+
+client = Ollama.new(
+  credentials: {
+    address: 'http://localhost:11434',
+    basic_auth: { username: 'usrname', password: 'passwd' }
+  },
+  options: { server_sent_events: true }
+)
+```
+
+Remember that hardcoding your credentials in code is unsafe. It's preferable to use environment variables:
+
+```ruby
+require 'ollama-ai'
+
+client = Ollama.new(
+  credentials: {
+    address: 'http://localhost:11434',
+    basic_auth: 'ENV['OLLAMA_USERNAME']:ENV['OLLAMA_PASSWORD']'
+  },
+  options: { server_sent_events: true }
+)
+```
+
+```ruby
+require 'ollama-ai'
+
+client = Ollama.new(
+  credentials: {
+    address: 'http://localhost:11434',
+    basic_auth: { username: ENV['OLLAMA_USERNAME'], password: ENV['OLLAMA_PASSWORD'] }
+  },
+  options: { server_sent_events: true }
+)
+```
+
 ### Methods
 
 ```ruby
@@ -750,7 +806,7 @@ end
 
 Output:
 > _The image displays an old piano, sitting on a wooden floor with black keys. Next to the piano, there is another keyboard in the scene, possibly used for playing music._
-> 
+>
 > _On top of the piano, there are two mice placed in different locations within its frame. These mice might be meant for controlling the music being played or simply as decorative items. The overall atmosphere seems to be focused on artistic expression through this unique instrument._
 
 ### Streaming and Server-Sent Events (SSE)
