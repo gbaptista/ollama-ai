@@ -78,7 +78,7 @@ module Ollama
       end
 
       def embeddings(payload, server_sent_events: nil, &callback)
-        request('api/embeddings', payload, server_sent_events:, &callback)
+        request('api/embed', payload, server_sent_events:, &callback)
       end
 
       def request(path, payload = nil, server_sent_events: nil, request_method: 'POST', &callback)
